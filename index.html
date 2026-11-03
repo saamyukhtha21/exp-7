@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sweet Crumbs - Working with jQuery</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3eaff;
+            color: #49245f;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #75439b;
+            text-align: center;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 25px auto;
+            max-width: 850px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #d9c0f5;
+        }
+
+        input {
+            padding: 9px;
+            margin: 7px;
+            border: 1px solid #b98bd9;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #925db9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            margin: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #66358c;
+        }
+
+        .result {
+            margin-top: 18px;
+            padding: 15px;
+            background: #f3eaff;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .cake-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+
+        .cake {
+            background: #f3eaff;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .cake span {
+            font-size: 35px;
+        }
+
+        .cake input {
+            width: 70px;
+        }
+
+        /* Car Workshop */
+        #car {
+            width: 280px;
+            height: 160px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .car-body {
+            fill: #925db9;
+        }
+
+        .car-glass {
+            fill: #bde5f5;
+        }
+
+        .tyre {
+            fill: #222;
+            stroke: #777;
+            stroke-width: 3;
+        }
+
+        @media(max-width: 600px) {
+            .cake-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Sweet Crumbs Cake Shop</h1>
+    <p style="text-align:center;">Working with jQuery</p>
+
+
+    <!-- QUESTION 1: BUDGET CALCULATOR -->
+
+    <div class="section">
+
+        <h2>1. Budget Calculator</h2>
+
+        <p style="text-align:center;">
+            Enter the amount you want to manage.
+        </p>
+
+        <center>
+            <input type="number" id="amount"
+                   placeholder="Enter amount">
+        </center>
+
+        <h3>How would you like to divide your money?</h3>
+
+        Room Rent (%):
+        <input type="number" id="rent" value="50"><br>
+
+        Accessories (%):
+        <input type="number" id="accessories" value="20"><br>
+
+        Emergency (%):
+        <input type="number" id="emergency" value="20"><br>
+
+        Savings (%):
+        <input type="number" id="saving" value="10"><br>
+
+        <center>
+            <button id="evaluate">Evaluate My Money</button>
+        </center>
+
+        <div class="result" id="budgetResult">
+            Your budget details will appear here.
+        </div>
+
+    </div>
+
+
+    <!-- QUESTION 2: CAKE ORDER CALCULATOR -->
+
+    <div class="section">
+
+        <h2>2. Cake Order Calculator</h2>
+
+        <div class="cake-list">
+
+            <div class="cake">
+                <span>🎂</span>
+                <h4>Color Cake</h4>
+                <p>₹300</p>
+            </div>
+
+            <div class="cake">
+                <span>🍫</span>
+                <h4>Brown Cake</h4>
+                <p>₹200</p>
+            </div>
+
+            <div class="cake">
+                <span>🍰</span>
+                <h4>Milky Cake</h4>
+                <p>₹250</p>
+            </div>
+
+            <div class="cake">
+                <span>🍒</span>
+                <h4>Black Forest</h4>
+                <p>₹500</p>
+            </div>
+
+        </div>
+
+        <h2>Order Cake</h2>
+
+        <label>Color Cake (Quantity)</label><br>
+        <input type="number" id="colorCake" value="0" min="0"><br>
+
+        <label>Brown Cake (Quantity)</label><br>
+        <input type="number" id="brownCake" value="0" min="0"><br>
+
+        <label>Milky Cake (Quantity)</label><br>
+        <input type="number" id="milkyCake" value="0" min="0"><br>
+
+        <label>Black Forest Cake (Quantity)</label><br>
+        <input type="number" id="blackCake" value="0" min="0"><br>
+
+        <center>
+            <button id="placeOrder">Place Order</button>
+        </center>
+
+        <h3 style="text-align:center;">Purchase Order Bill</h3>
+
+        <div class="result" id="cakeResult">
+            Total Price: ₹0
+        </div>
+
+    </div>
+
+
+    <!-- QUESTION 3: CAR BODY WORKSHOP -->
+
+    <div class="section">
+
+        <h2>3. Car Body Workshop</h2>
+
+        <p style="text-align:center;">
+            Customize the delivery car by changing its body colour,
+            glass tint and tyre size.
+        </p>
+
+        <svg id="car" viewBox="0 0 300 160">
+
+            <!-- Car Body -->
+            <path class="car-body"
+                  d="M35 85 L55 55 L90 55 L115 25
+                     L205 25 L235 55 L260 65
+                     L270 100 L30 100 Z"/>
+
+            <!-- Glass -->
+            <path class="car-glass"
+                  d="M100 55 L120 32 L155 32 L155 55 Z"/>
+
+            <path class="car-glass"
+                  d="M165 32 L200 32 L220 55 L165 55 Z"/>
+
+            <!-- Wheels -->
+            <circle class="tyre" cx="85" cy="108" r="23"/>
+            <circle class="tyre" cx="220" cy="108" r="23"/>
+
+            <!-- Headlight -->
+            <rect x="250" y="72" width="15" height="12"
+                  rx="3" fill="yellow"/>
+
+            <!-- Door -->
+            <line x1="160" y1="60" x2="160" y2="100"
+                  stroke="white" stroke-width="2"/>
+
+        </svg>
+
+        <center>
+
+            <button id="changeColor">Change Body Colour</button>
+
+            <button id="changeGlass">Change Glass Tint</button>
+
+            <button id="increaseTyre">Increase Tyre Size</button>
+
+            <button id="decreaseTyre">Decrease Tyre Size</button>
+
+            <button id="resetCar">Reset</button>
+
+        </center>
+
+    </div>
+
+
+    <!-- JQUERY CODE -->
+
+    <script>
+
+        $(document).ready(function() {
+
+
+            /* QUESTION 1: BUDGET CALCULATOR */
+
+            $("#evaluate").click(function() {
+
+                var amount = parseFloat($("#amount").val());
+
+                var rent = parseFloat($("#rent").val());
+                var accessories = parseFloat($("#accessories").val());
+                var emergency = parseFloat($("#emergency").val());
+                var saving = parseFloat($("#saving").val());
+
+                if (
+                    !Number.isFinite(amount) || amount <= 0 ||
+                    !Number.isFinite(rent) ||
+                    !Number.isFinite(accessories) ||
+                    !Number.isFinite(emergency) ||
+                    !Number.isFinite(saving) ||
+                    rent < 0 || accessories < 0 ||
+                    emergency < 0 || saving < 0
+                ) {
+                    alert("Please enter valid amount and percentages.");
+                    return;
+                }
+
+                var totalPercentage =
+                    rent + accessories + emergency + saving;
+
+                if (totalPercentage !== 100) {
+
+                    alert("The total percentage must be 100%.");
+
+                    return;
+                }
+
+                var rentAmount = amount * rent / 100;
+                var accessoriesAmount = amount * accessories / 100;
+                var emergencyAmount = amount * emergency / 100;
+                var savingAmount = amount * saving / 100;
+
+                $("#budgetResult").html(
+                    "Room Rent: ₹" + rentAmount.toFixed(2) +
+                    "<br>Accessories: ₹" + accessoriesAmount.toFixed(2) +
+                    "<br>Emergency: ₹" + emergencyAmount.toFixed(2) +
+                    "<br>Savings: ₹" + savingAmount.toFixed(2)
+                );
+
+            });
+
+
+            /* QUESTION 2: CAKE ORDER CALCULATOR */
+
+            $("#placeOrder").click(function() {
+
+                var color = Number($("#colorCake").val());
+                var brown = Number($("#brownCake").val());
+                var milky = Number($("#milkyCake").val());
+                var black = Number($("#blackCake").val());
+
+                if (
+                    !Number.isInteger(color) || color < 0 ||
+                    !Number.isInteger(brown) || brown < 0 ||
+                    !Number.isInteger(milky) || milky < 0 ||
+                    !Number.isInteger(black) || black < 0
+                ) {
+                    alert("Please enter valid cake quantities.");
+                    return;
+                }
+
+                var colorPrice = color * 300;
+                var brownPrice = brown * 200;
+                var milkyPrice = milky * 250;
+                var blackPrice = black * 500;
+
+                var total = colorPrice + brownPrice +
+                            milkyPrice + blackPrice;
+
+                $("#cakeResult").html(
+                    "Color Cake: ₹" + colorPrice +
+                    "<br>Brown Cake: ₹" + brownPrice +
+                    "<br>Milky Cake: ₹" + milkyPrice +
+                    "<br>Black Forest Cake: ₹" + blackPrice +
+                    "<hr>Total Price: ₹" + total
+                );
+
+            });
+
+
+            /* QUESTION 3: CAR BODY WORKSHOP */
+
+            // Change car body colour
+            $("#changeColor").click(function() {
+
+                var colors = [
+                    "red", "blue", "green",
+                    "orange", "purple", "pink"
+                ];
+
+                var randomColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                $(".car-body").css("fill", randomColor);
+
+            });
+
+
+            // Change glass tint
+            $("#changeGlass").click(function() {
+
+                var colors = [
+                    "#bde5f5", "#555555",
+                    "#a5d6a7", "#f8bbd0", "#ffcc80"
+                ];
+
+                var randomColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                $(".car-glass").css("fill", randomColor);
+
+            });
+
+
+            // Increase tyre size
+            $("#increaseTyre").click(function() {
+
+                $(".tyre").each(function() {
+
+                    var size = parseInt($(this).attr("r"));
+
+                    if (size < 35) {
+                        $(this).attr("r", size + 3);
+                    }
+
+                });
+
+            });
+
+
+            // Decrease tyre size
+            $("#decreaseTyre").click(function() {
+
+                $(".tyre").each(function() {
+
+                    var size = parseInt($(this).attr("r"));
+
+                    if (size > 12) {
+                        $(this).attr("r", size - 3);
+                    }
+
+                });
+
+            });
+
+
+            // Reset car appearance
+            $("#resetCar").click(function() {
+
+                $(".car-body").css("fill", "#925db9");
+
+                $(".car-glass").css("fill", "#bde5f5");
+
+                $(".tyre").attr("r", 23);
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
+
